@@ -13,12 +13,12 @@ function learnAboutRepo(repoObj){
     var url = repoObj.url + '/contents';
     console.log(url);
     var repoReq = new XMLHttpRequest();
-    repoReq.onload = digInFiles;
+    repoReq.onload = digInFiles.bind(repoReq, name);
     repoReq.open("get", url, true);
     repoReq.send();
 }
 
-function digInFiles(){
+function digInFiles(name){
     console.log(name);
     var repo = JSON.parse(this.responseText)
     var found = false;
