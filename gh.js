@@ -8,7 +8,7 @@ function handleRepoList() {
 function learnAboutRepo(repoObj){
     var name = repoObj.name;
     console.log(name);
-    var url = repoObj.url;
+    var url = repoObj.url + '/contents';
     console.log(url);
     var repoReq = new XMLHttpRequest();
     repoReq.onload = digInFiles;
