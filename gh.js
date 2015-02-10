@@ -10,17 +10,17 @@ function handleRepoList() {
             alert("Invalid user.");
         }
         if (data.message.match(/API rate limit exceeded/)){
-            document.getElementById("results").style.display = 'none';                 
+            document.getElementById("results").style.display = 'none';
             document.getElementById("instructions").style.display = 'block';
             var message = "It looks like you've exceeded the GitHub API's rate"+
             "limit, which is 60 requests per hour. Try again later, or from a"+
             "different IP address.";
 
-            document.getElementById("instructions").innerHTML = message;                  
+            document.getElementById("instructions").innerHTML = message;
 
         }
     }
-    
+
     else{
         data.forEach(learnAboutRepo);
     }
@@ -52,11 +52,11 @@ function digInFiles(name, link){
     console.log(found);
     console.log(append);
     if (found){
-        _gaq.push(['users._trackEvent', 'licenseFound', link])                       
+        _gaq.push(['users._trackEvent', 'licenseFound', link])
         document.getElementById("goodrepos").innerHTML += append;
     }
     else{
-        _gaq.push(['users._trackEvent', 'licenseMissing', link])                       
+        _gaq.push(['users._trackEvent', 'licenseMissing', link])
         document.getElementById("badrepos").innerHTML += append;
     }
 }
