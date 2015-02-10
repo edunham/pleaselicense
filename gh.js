@@ -18,7 +18,12 @@ function learnAboutRepo(repoObj){
 
 function digInFiles(){
     var repo = JSON.parse(this.responseText)
+    var found = false;
     console.log(repo);
+    repo.reduce(function(old, f, idx, array){
+        found = !!(found || f.name.match(/license/i) || f.name.match(/copying/i));
+    });
+    console.log(found);
 }
 
 console.log("don't worry, it's working");
