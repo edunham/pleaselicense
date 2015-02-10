@@ -5,22 +5,20 @@
 function handleRepoList() {
     var data = JSON.parse(this.responseText);
     console.log(data);
-    if (data.message ){
+    if (data.message){
         if (data.message.match(/Not Found/)){
-            alert("Invalid user.");
+            alert("Invalid user. Please try with a valid GitHub username.");
         }
-        if (data.message.match(/API rate limit exceeded/)){
+        if (data.message.match(/API rate limit/i)){
+            console.log("rate limit fail");
             document.getElementById("results").style.display = 'none';
             document.getElementById("instructions").style.display = 'block';
             var message = "It looks like you've exceeded the GitHub API's rate"+
-            "limit, which is 60 requests per hour. Try again later, or from a"+
+            "limit, which is 60 requests per hour. Try again later, or from a "+
             "different IP address.";
-
             document.getElementById("instructions").innerHTML = message;
-
         }
     }
-
     else{
         data.forEach(learnAboutRepo);
     }
