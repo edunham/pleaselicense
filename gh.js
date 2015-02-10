@@ -5,9 +5,22 @@
 function handleRepoList() {
     var data = JSON.parse(this.responseText);
     console.log(data);
-    if (data.message && data.message.match(/Not Found/)){
-        alert("Invalid user.");
+    if (data.message ){
+        if (data.message.match(/Not Found/)){
+            alert("Invalid user.");
+        }
+        if (data.message.match(/API rate limit exceeded/)){
+            document.getElementById("results").style.display = 'none';                 
+            document.getElementById("instructions").style.display = 'block';
+            var message = "It looks like you've exceeded the GitHub API's rate"+
+            "limit, which is 60 requests per hour. Try again later, or from a"+
+            "different IP address.";
+
+            document.getElementById("instructions").innerHTML = message;                  
+
+        }
     }
+    
     else{
         data.forEach(learnAboutRepo);
     }
@@ -27,7 +40,7 @@ function learnAboutRepo(repoObj){
 
 function digInFiles(name, link){
     console.log(name);
-    var repo = JSON.parse(this.responseText)
+    var repo = JSON.parse(this.responseText);
     var found = false;
     console.log(repo);
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
