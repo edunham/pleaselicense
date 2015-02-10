@@ -1,3 +1,5 @@
+"use strict";
+
 // yay https://developer.github.com/v3/#cross-origin-resource-sharing
 
 function handleRepoList() {
@@ -17,6 +19,7 @@ function learnAboutRepo(repoObj){
 }
 
 function digInFiles(){
+    console.log(name);
     var repo = JSON.parse(this.responseText)
     var found = false;
     console.log(repo);
