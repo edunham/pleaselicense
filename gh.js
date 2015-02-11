@@ -54,6 +54,7 @@ function digInFiles(name, link){
         }
     }
     else{ 
+        var _gaq = _gaq || [];
         append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
         if (found){
             _gaq.push(['users._trackEvent', 'licenseFound', link])
@@ -73,6 +74,9 @@ function getUser(){
     document.getElementById("badrepos").innerHTML = "";
     var user = document.getElementById('ghuser').value;
     // be stalkey, because why not
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['users._setAccount', 'UA-58732341-2']);
     _gaq.push(['users._trackEvent', 'userChecked', user])
 
     var oReq = new XMLHttpRequest();
@@ -86,6 +90,4 @@ function getUser(){
     document.getElementById("instructions").style.display = 'none';
 }
 
-var _gaq = _gaq || [];
-_gaq.push(['users._setAccount', 'UA-58732341-2']);
 
