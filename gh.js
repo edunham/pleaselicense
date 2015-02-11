@@ -39,13 +39,10 @@ function learnAboutRepo(repoObj){
 function digInFiles(name, link){
     console.log(name);
     var repo = JSON.parse(this.responseText);
-    var found = false;
+    var found = repo.reduce(function(p, f){!!(p || f.name.match(/license/i) || f.name.match(/copying/i));}, false);
     console.log(repo);
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-    repo.reduce(function(old, f, idx, array){
-        // !! casts to a boolean. the /i on match makes it case insensitive.
-        found = !!(found || f.name.match(/license/i) || f.name.match(/copying/i));
-    });
+    repo.reduce(function(old, f){!!(old || f.name.match(/license/i) || f.name.match(/copying/i));});
     var append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
     console.log(found);
     console.log(append);
