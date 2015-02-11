@@ -41,7 +41,10 @@ function learnAboutRepo(repoObj){
 function digInFiles(name, link){
     console.log(name);
     var repo = JSON.parse(this.responseText);
-    var found = repo.reduce(function(p, f){!!(p || f.name.match(/license/i) || f.name.match(/copying/i));}, false);
+    var found = false; 
+    repo.forEach(function(repo){
+        found = !!(found || repo.name.match(/license/i) || repo.name.match(/copying/i));
+    });
     console.log(repo);
     var append = "";
     if (repo.message){
