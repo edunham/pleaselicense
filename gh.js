@@ -67,13 +67,6 @@ function getUser(){
     // find the username being searched, and send request
     var user = document.getElementById('ghuser').value;
     // be stalkey, because why not
-    var _gaq = _gaq || [];
-    /*
-     *_gaq.push(['myTracker._setAccount', 'UA-65432-2']);
-     _gaq.push(['myTracker._setDomainName', 'foo.com']);
-     _gaq.push(['myTracker._trackPageview']);
-     * */
-    _gaq.push(['users._setAccount', 'UA-58732341-2']);
     _gaq.push(['users._trackEvent', 'userChecked', user])
 
 
@@ -87,3 +80,7 @@ function getUser(){
     document.getElementById("results").style.display = 'block';
     document.getElementById("instructions").style.display = 'none';
 }
+
+var _gaq = _gaq || [];
+_gaq.push(['users._setAccount', 'UA-58732341-2']);
+
