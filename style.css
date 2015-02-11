@@ -11,19 +11,22 @@ body { margin: 0; }
 .leftColumn, .rightColumn, footer, header {  border: 1px solid  #ccc; padding: 1.25em; }
 
 .leftColumn { margin-bottom: .5em; }
-
+.rightColumn{ margin-bottom: 20em; }
+.staydown{ 
+        left: 0;
+        right: 0;
+        bottom:0;
+        position:fixed;
+        background-color:white;
+}
 /* MEDIA QUERIES */
 @media screen and (min-width: 47.5em ) {
-  .leftColumn { margin-right: 19.5em; }
-
-    .rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }   
+    .leftColumn { margin-right: 19.5em; }
+    .rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }
+    .staydown{ height: 2em; margin-top: 1em;}
+    .importantstuff{ margin-bottom: 50px; }
 }
 
 /* thanks to Royi Namir on
- * http://stackoverflow.com/questions/18739937/how-to-keep-footer-at-bottom-of-screen*/
-.staydown{  position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 30px;
-            align: center; }
+ * http://stackoverflow.com/questions/18739937/how-to-keep-footer-at-bottom-of-screen * for the staydown footer code
+*/
