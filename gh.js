@@ -1,5 +1,13 @@
 "use strict";
-
+function rateMessage(){
+    console.log("rate limit fail");
+    document.getElementById("results").style.display = 'none';
+    document.getElementById("instructions").style.display = 'block';
+    var message = "It looks like you've exceeded the GitHub API's rate"+
+    "limit, which is 60 requests per hour. Try again later, or from a "+
+    "different IP address.";
+    document.getElementById("instructions").innerHTML = message;
+}
 // yay https://developer.github.com/v3/#cross-origin-resource-sharing
 
 function handleRepoList() {
@@ -10,13 +18,7 @@ function handleRepoList() {
             alert("Invalid user. Please try with a valid GitHub username.");
         }
         if (data.message.match(/API rate limit/i)){
-            console.log("rate limit fail");
-            document.getElementById("results").style.display = 'none';
-            document.getElementById("instructions").style.display = 'block';
-            var message = "It looks like you've exceeded the GitHub API's rate"+
-            "limit, which is 60 requests per hour. Try again later, or from a "+
-            "different IP address.";
-            document.getElementById("instructions").innerHTML = message;
+            rateMessage();
         }
     }
     else{
@@ -41,18 +43,26 @@ function digInFiles(name, link){
     var repo = JSON.parse(this.responseText);
     var found = repo.reduce(function(p, f){!!(p || f.name.match(/license/i) || f.name.match(/copying/i));}, false);
     console.log(repo);
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-    repo.reduce(function(old, f){!!(old || f.name.match(/license/i) || f.name.match(/copying/i));});
-    var append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
-    console.log(found);
-    console.log(append);
-    if (found){
-        _gaq.push(['users._trackEvent', 'licenseFound', link])
-        document.getElementById("goodrepos").innerHTML += append;
+    var append = "";
+    if (repo.message){
+        if (repo.message.match(/API rate limit/i)){
+            rateMessage();
+        }
+        else{
+            append = "<li>"+"<a href=\""+link+"\">"+name+"</a>"+repo.message+"</li>";
+            document.getElementById("messages").innerHTML += append;
+        }
     }
-    else{
-        _gaq.push(['users._trackEvent', 'licenseMissing', link])
-        document.getElementById("badrepos").innerHTML += append;
+    else{ 
+        append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
+        if (found){
+            _gaq.push(['users._trackEvent', 'licenseFound', link])
+            document.getElementById("goodrepos").innerHTML += append;
+        }
+        else{
+            _gaq.push(['users._trackEvent', 'licenseMissing', link])
+            document.getElementById("badrepos").innerHTML += append;
+        }
     }
 }
 
@@ -61,11 +71,9 @@ function getUser(){
     //first, clear any old results
     document.getElementById("goodrepos").innerHTML = "";
     document.getElementById("badrepos").innerHTML = "";
-    // find the username being searched, and send request
     var user = document.getElementById('ghuser').value;
     // be stalkey, because why not
     _gaq.push(['users._trackEvent', 'userChecked', user])
-
 
     var oReq = new XMLHttpRequest();
     oReq.onload = handleRepoList;
