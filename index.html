@@ -12,6 +12,8 @@
 <body>
         <input type="text" id="ghuser"/>
         <button onclick="getUser();">Stalk Repos</button>
+        <br>
+        <p><input type="text" id="apikey"/> Optional API token</p>
     <div id="instructions">
         <p>Enter your GitHub username in the box above and click the button!</p>
         <p>The script will look up whether your public repos have
@@ -32,12 +34,16 @@
 
         <div class="rightColumn">
             <h2>Thank you for licensing:</h2>
-            <ul id=goodrepos>
+            <ul id="goodrepos">
             </ul>
 
         </div>
 
     </div>
-    
+    <div class="footer">
+        <ul id="messages">
+        </ul>
+    </div>
+
 </body>
 </html>

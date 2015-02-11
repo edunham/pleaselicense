@@ -27,7 +27,11 @@ function learnAboutRepo(repoObj){
     var name = repoObj.name;
     console.log(name);
     var url = repoObj.url + '/contents';
-    var html_url = repoObj.html_url;
+    var apikey = document.getElementById('apikey').value;
+    if (apikey){
+        url += "?access_token="+apikey;
+    }
+ var html_url = repoObj.html_url;
     console.log(url);
     var repoReq = new XMLHttpRequest();
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
@@ -39,23 +43,30 @@ function learnAboutRepo(repoObj){
 function digInFiles(name, link){
     console.log(name);
     var repo = JSON.parse(this.responseText);
-    var found = false;
-    console.log(repo);
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-    repo.reduce(function(old, f, idx, array){
-        // !! casts to a boolean. the /i on match makes it case insensitive.
-        found = !!(found || f.name.match(/license/i) || f.name.match(/copying/i));
-    });
-    var append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
-    console.log(found);
-    console.log(append);
-    if (found){
-        _gaq.push(['users._trackEvent', 'licenseFound', link])
-        document.getElementById("goodrepos").innerHTML += append;
+    var append = '';
+    if (repo.message){
+        append = "<li>"+"<a href=\""+link+"\">"+name+": "+repo.message+"</a></li>";
+        document.getElementById("messages").innerHTML += append;
     }
     else{
-        _gaq.push(['users._trackEvent', 'licenseMissing', link])
-        document.getElementById("badrepos").innerHTML += append;
+        var found = false;
+        console.log(repo);
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+        repo.reduce(function(old, f, idx, array){
+            // !! casts to a boolean. the /i on match makes it case insensitive.
+            found = !!(found || f.name.match(/license/i) || f.name.match(/copying/i));
+        });
+        append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
+        console.log(found);
+        console.log(append);
+        if (found){
+            _gaq.push(['users._trackEvent', 'licenseFound', link])
+            document.getElementById("goodrepos").innerHTML += append;
+        }
+        else{
+            _gaq.push(['users._trackEvent', 'licenseMissing', link])
+            document.getElementById("badrepos").innerHTML += append;
+        }
     }
 }
 
@@ -66,20 +77,15 @@ function getUser(){
     document.getElementById("badrepos").innerHTML = "";
     // find the username being searched, and send request
     var user = document.getElementById('ghuser').value;
+    var apikey = document.getElementById('apikey').value;
     // be stalkey, because why not
-    var _gaq = _gaq || [];
-    /*
-     *_gaq.push(['myTracker._setAccount', 'UA-65432-2']);
-     _gaq.push(['myTracker._setDomainName', 'foo.com']);
-     _gaq.push(['myTracker._trackPageview']);
-     * */
-    _gaq.push(['users._setAccount', 'UA-58732341-2']);
     _gaq.push(['users._trackEvent', 'userChecked', user])
-
-
     var oReq = new XMLHttpRequest();
     oReq.onload = handleRepoList;
     var url = "https://api.github.com/users/" + user + "/repos";
+    if (apikey){
+        url += "?access_token="+apikey;
+    }
     oReq.open("get", url, true);
     oReq.send();
     console.log("username " + user);
@@ -87,3 +93,7 @@ function getUser(){
     document.getElementById("results").style.display = 'block';
     document.getElementById("instructions").style.display = 'none';
 }
+
+var _gaq = _gaq || [];
+_gaq.push(['users._setAccount', 'UA-58732341-2']);
+
