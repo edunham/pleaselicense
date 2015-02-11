@@ -92,7 +92,7 @@ function getUser(){
     document.getElementById("results").style.display = 'block';
     document.getElementById("instructions").style.display = 'none';
 }
-document.querySelector('#ghform').addEventListener('submit', function(){
+document.querySelector('#ghform').addEventListener('submit', function(ev){
     ev.preventDefault();
     getUser();
     return false;
