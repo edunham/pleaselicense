@@ -1,7 +1,8 @@
 "use strict";
 function rateMessage(){
     console.log("rate limit fail");
-    document.getElementById("results").style.display = 'none';
+    document.getElementById("licenseresults").style.display = 'none';
+    document.getElementById("readmeresults").style.display = 'none';
     document.getElementById("instructions").style.display = 'block';
     var message = "It looks like you've exceeded the GitHub API's rate"+
     "limit, which is 60 requests per hour. Try again later, or from a "+
@@ -41,9 +42,11 @@ function learnAboutRepo(repoObj){
 function digInFiles(name, link){
     console.log(name);
     var repo = JSON.parse(this.responseText);
-    var found = false; 
+    var licensefound = false;
+    var readmefound = false; 
     repo.forEach(function(repo){
-        found = !!(found || repo.name.match(/license/i) || repo.name.match(/copying/i));
+        licensefound = !!(licensefound || repo.name.match(/license/i) || repo.name.match(/copying/i));
+        readmefound = !!(readmefound || repo.name.match(/readme/i))
     });
     console.log(repo);
     var append = "";
@@ -60,7 +63,7 @@ function digInFiles(name, link){
         // try to do analytics with gaq 
         var _gaq = _gaq || [];
         append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
-        if (found){
+        if (licensefound){
             _gaq.push(['users._trackEvent', 'licenseFound', link])
             document.getElementById("haslicense").innerHTML += append;
         }
@@ -68,12 +71,20 @@ function digInFiles(name, link){
             _gaq.push(['users._trackEvent', 'licenseMissing', link])
             document.getElementById("lackslicense").innerHTML += append;
         }
+        if (readmefound){
+            _gaq.push(['users._trackEvent', 'readmeFound', link])
+            document.getElementById("hasreadme").innerHTML += append;
+        }
+        else{
+            _gaq.push(['users._trackEvent', 'readmeMissing', link])
+            document.getElementById("lacksreadme").innerHTML += append;
+        }
     }
 }
 
 function getUser(){
     //this function called by clicking the stalk repos button
-    //first, clear any old results
+    //first, clear any old licenseresults
     document.getElementById("haslicense").innerHTML = "";
     document.getElementById("lackslicense").innerHTML = "";
     var user = document.getElementById('ghuser').value;
@@ -90,7 +101,8 @@ function getUser(){
     oReq.send();
     console.log("username " + user);
     //make output visible and hide intsructions
-    document.getElementById("results").style.display = 'block';
+    document.getElementById("licenseresults").style.display = 'block';
+    document.getElementById("readmeresults").style.display = 'block';
     document.getElementById("instructions").style.display = 'none';
 }
 document.querySelector('#ghform').addEventListener('submit', function(ev){
