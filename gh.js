@@ -56,16 +56,17 @@ function digInFiles(name, link){
             document.getElementById("messages").innerHTML += append;
         }
     }
-    else{ 
+    else{
+        // try to do analytics with gaq 
         var _gaq = _gaq || [];
         append = "<li>"+"<a href=\""+link+"\">"+name+"</a></li>";
         if (found){
             _gaq.push(['users._trackEvent', 'licenseFound', link])
-            document.getElementById("goodrepos").innerHTML += append;
+            document.getElementById("haslicense").innerHTML += append;
         }
         else{
             _gaq.push(['users._trackEvent', 'licenseMissing', link])
-            document.getElementById("badrepos").innerHTML += append;
+            document.getElementById("lackslicense").innerHTML += append;
         }
     }
 }
@@ -73,11 +74,11 @@ function digInFiles(name, link){
 function getUser(){
     //this function called by clicking the stalk repos button
     //first, clear any old results
-    document.getElementById("goodrepos").innerHTML = "";
-    document.getElementById("badrepos").innerHTML = "";
+    document.getElementById("haslicense").innerHTML = "";
+    document.getElementById("lackslicense").innerHTML = "";
     var user = document.getElementById('ghuser').value;
+
     // be stalkey, because why not
-    
     var _gaq = _gaq || [];
     _gaq.push(['users._setAccount', 'UA-58732341-2']);
     _gaq.push(['users._trackEvent', 'userChecked', user])
