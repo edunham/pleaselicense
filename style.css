@@ -12,13 +12,14 @@ body { margin: 0; }
 
 .leftColumn { margin-bottom: .5em; }
 .rightColumn{ margin-bottom: 20em; }
-.staydown{ 
+.staydown{
         left: 0;
         right: 0;
         bottom:0;
         position:fixed;
         background-color:white;
 }
+.hide-fork { display: none; }
 /* MEDIA QUERIES */
 @media screen and (min-width: 47.5em ) {
     .leftColumn { margin-right: 19.5em; }
