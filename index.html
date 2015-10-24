@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,11 +11,17 @@
 <body>
 <div class="importantstuff">
         <form id="ghform">
+            <label for="ghuser">Username: </label>
             <input type="text" id="ghuser"/>
+            <br>
+            <label for="ghtoken">Github API Token (<i>optional</i>): </label>
+            <input type="password" id="ghtoken"/>
+            <br>
             <button type="submit">Stalk Repos</button>
         </form>
     <div id="instructions">
         <p>Enter your GitHub username in the box above and click the button!</p>
+        <p>If you get rate limited, you can enter a token as found <a href="https://github.com/settings/tokens">here</a>.</p>
         <p>The script will look up whether your public repos have
         licenses.</p>
         <p>This page uses Google Analytics to track which usernames have been
@@ -30,7 +36,7 @@
         </div>
         <div class="rightColumn">
             <h2>Thank you for licensing:</h2>
-            <ul id=haslicense>
+            <ul id="haslicense">
             </ul>
         </div>
     </div>
@@ -43,7 +49,7 @@
         </div>
         <div class="rightColumn">
             <h2>Thank you for having a README in:</h2>
-            <ul id=hasreadme>
+            <ul id="hasreadme">
             </ul>
         </div>
     </div>
