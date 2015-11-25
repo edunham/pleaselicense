@@ -10,26 +10,30 @@
 
 <body>
 <div class="importantstuff">
+        <h1>License Checker</h1>
+        <div id="instructions">
+
+<p>Enter a GitHub username or organization name in the box below
+and click the button! If you hit a rate limit error, get a token 
+<a href="https://github.com/settings/tokens">here</a> and put it in the token
+box. A repo is considered "licensed" if it has a file whose name starts with
+"LICENSE" or "COPYING" (any case) at the top level; sorry for any false
+negatives.</p>
+
+        </div>
+
         <form id="ghform">
-            <label for="ghuser">Username: </label>
+            <label for="ghuser">User or Organization: </label>
             <input type="text" id="ghuser"/>
-            <br>
+            <br><br>
             <label for="ghtoken">Github API Token (<i>optional</i>): </label>
-            <input type="password" id="ghtoken"/>
+            <input type="password" id="ghtoken"/> | 
+            <label for="hideforks">Hide forks?</label>
+            <input type="checkbox" checked="true" id="hideforks"/>
             <br>
             <button type="submit">Stalk Repos</button>
             <br>
-            <label for="hideforks">Hide forks?</label>
-            <input type="checkbox" checked="true" id="hideforks"/>
-        </form>
-    <div id="instructions">
-        <p>Enter your GitHub username in the box above and click the button!</p>
-        <p>If you get rate limited, you can enter a token as found <a href="https://github.com/settings/tokens">here</a>.</p>
-        <p>The script will look up whether your public repos have
-        licenses.</p>
-        <p>This page uses Google Analytics to track which usernames have been
-        searched, so that pretty graphs can be made later.</p>
-    </div>
+       </form>
     <div class="columnsContainer" id="licenseresults" style="display:none;">
         <div class="leftColumn" >
             <h2>Please add LICENSE or COPYING files to:</h2>
@@ -71,7 +75,9 @@ on GitHub</a>, pull requests welcome.  </p>
 <p> GitHub has a neat blog related to this topic <a
 href="https://github.com/blog/1964-open-source-license-usage-on-github-com">here</a>.
 </p>
-
+<p>This page uses Google Analytics to
+track which usernames have been searched, so that pretty graphs can be made
+later.</p>
 </div>
 
 <script type="text/javascript" src="gh.js"></script>
