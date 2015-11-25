@@ -2,8 +2,7 @@
 "use strict";
 function rateMessage(){
     console.log("rate limit fail");
-    document.getElementById("licenseresults").style.display = 'none';
-    document.getElementById("readmeresults").style.display = 'none';
+    document.getElementById("results").style.display = 'none';
     document.getElementById("instructions").style.display = 'block';
     var message = "<p id=\"warn\">It looks like you've exceeded the GitHub API's rate "+
     "limit, which is 60 requests per hour. Try again later, or from a "+
@@ -123,7 +122,7 @@ function digInFiles(name, isfork, link){
 
 function getUser(){
     //this function called by clicking the stalk repos button
-    //first, clear any old licenseresults
+    //first, clear any old results
     document.getElementById("haslicense").innerHTML = "";
     document.getElementById("lackslicense").innerHTML = "";
     var user = document.getElementById('ghuser').value;
@@ -144,8 +143,7 @@ function getUser(){
     oReq.send();
     console.log("username " + user);
     //make output visible and hide intsructions
-    document.getElementById("licenseresults").style.display = 'block';
-    document.getElementById("readmeresults").style.display = 'block';
+    document.getElementById("results").style.display = 'block';
     document.getElementById("instructions").style.display = 'none';
 }
 document.querySelector('#ghform').addEventListener('submit', function(ev){

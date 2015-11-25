@@ -52,6 +52,16 @@ button {
     
 }
 
+table { 
+    table-layout: fixed;
+    width:100%;
+    word-wrap:break-word;
+}
+
+td {
+    width: 50%;
+}
+
 /* thanks to Royi Namir on
  * http://stackoverflow.com/questions/18739937/how-to-keep-footer-at-bottom-of-screen * for the staydown footer code
 */

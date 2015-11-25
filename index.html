@@ -36,37 +36,52 @@ negatives.</p>
         <button type="submit">Stalk Repos</button>
         <br>
    </form>
-<div class="columnsContainer" id="licenseresults" style="display:none;">
-    <div class="leftColumn" >
-        <h2>Please add LICENSE or COPYING files to:</h2>
 
-        <ul id="lackslicense">
-        </ul>
-    </div>
-    <div class="rightColumn">
-        <h2>Thank you for licensing:</h2>
-        <ul id="haslicense">
-        </ul>
-    </div>
-</div>
-<div class="columnsContainer" id="readmeresults" style="display:none;">
-    <div class="leftColumn" >
-        <h2>Please add a README to:</h2>
+<table id="results" style="display:none;">
+    <tr id="licenseheaders">
+        <th>
+            Please add LICENSE or COPYING files to:
+        </th>
+        <th>
+            Thank you for licensing:
+        </th>
+    </tr>
+    <tr id="licenseresults">
+        <td>
+            <ul id="lackslicense">
+            </ul>
+        </td>
+        <td>
+            <ul id="haslicense">
+            </ul>
+        </td>
+    </tr>
+    <tr id="readmeheaders">
+        <th>
+            Please add README files to:
+        </th>
+        <th>
+            Thank you for having a README in:
+        </th>
+    </tr>
+    <tr id="readmeresults" style="display:none;">
+        <td >
+            <ul id="lacksreadme">
+            </ul>
+        </td>
+        <td>
+            <ul id="hasreadme">
+            </ul>
+        </td>
+    </tr>
+</table>
 
-        <ul id="lacksreadme">
-        </ul>
-    </div>
-    <div class="rightColumn">
-        <h2>Thank you for having a README in:</h2>
-        <ul id="hasreadme">
-        </ul>
-    </div>
 </div>
 <div class="footer">
     <ul id="messages">
     </ul>
 </div> 
-</div>
+</table>
 <div class="staydown" align=center>
 
 <p> License checker by <a href="http://edunham.net/">edunham</a> , distributed
