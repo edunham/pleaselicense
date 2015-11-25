@@ -28,6 +28,17 @@ body { margin: 0; }
     .importantstuff{ margin-bottom: 50px; }
 }
 
+.importantstuff {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 2%;
+}
+
+.warn {
+    border: 1em;
+    background-color: #FFFFE0;
+}
+
 /* thanks to Royi Namir on
  * http://stackoverflow.com/questions/18739937/how-to-keep-footer-at-bottom-of-screen * for the staydown footer code
 */
