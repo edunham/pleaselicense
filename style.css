@@ -18,13 +18,15 @@ body { margin: 0; }
         bottom:0;
         position:fixed;
         background-color:white;
+        font-size: .5em;
 }
+
 .hide-fork { display: none; }
 /* MEDIA QUERIES */
 @media screen and (min-width: 47.5em ) {
     .leftColumn { margin-right: 19.5em; }
     .rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }
-    .staydown{ height: 2em; margin-top: 1em;}
+    .staydown{ height: 5em; margin-top: 1em;}
     .importantstuff{ margin-bottom: 50px; }
 }
 
@@ -33,10 +35,21 @@ body { margin: 0; }
     padding-right: 15%;
     padding-top: 2%;
 }
+#enlarge {
+    font-size: 1.5em;
+}
+#warn {
+    padding: 1em;
+    background-color: #FFFF75;
+    font-size: 1.2em;
+}
 
-.warn {
-    border: 1em;
-    background-color: #FFFFE0;
+button {
+    font-size: 1.5em;
+    background-color: #DDDDDD;
+    padding-left: 1em;
+    padding-right: 1em;
+    
 }
 
 /* thanks to Royi Namir on
