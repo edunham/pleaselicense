@@ -5,9 +5,10 @@ function rateMessage(){
     document.getElementById("licenseresults").style.display = 'none';
     document.getElementById("readmeresults").style.display = 'none';
     document.getElementById("instructions").style.display = 'block';
-    var message = "It looks like you've exceeded the GitHub API's rate"+
+    var message = "<p id=\"warn\">It looks like you've exceeded the GitHub API's rate "+
     "limit, which is 60 requests per hour. Try again later, or from a "+
-    'different IP address. Alternately, enter a token (as found <a href="https://github.com/settings/tokens">here</a>"';
+    'different IP address. Alternately, enter a token (as found <a href='+
+    '"https://github.com/settings/tokens">here</a>)</p>';
     document.getElementById("instructions").innerHTML = message;
 }
 // yay https://developer.github.com/v3/#cross-origin-resource-sharing
