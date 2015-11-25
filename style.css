@@ -1,17 +1,7 @@
 /* From example online at http://codepen.io/johnstonian/pen/guhid */
 
-*, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
-
 body { margin: 0; }
 
-.columnsContainer, footer, header { position: relative; margin: .5em; }
-
-.leftColumn, .rightColumn, footer, header {  border: 1px solid  #ccc; padding: 1.25em; }
-
-.leftColumn { margin-bottom: .5em; }
-.rightColumn{ margin-bottom: 20em; }
 .staydown{
         left: 0;
         right: 0;
@@ -49,17 +39,19 @@ button {
     background-color: #DDDDDD;
     padding-left: 1em;
     padding-right: 1em;
-    
 }
 
 table { 
     table-layout: fixed;
     width:100%;
     word-wrap:break-word;
+    padding:.25em;
 }
 
-td {
-    width: 50%;
+td, th {
+    text-align: left;
+    border: 1px solid;
+    padding: 0.5em;
 }
 
 /* thanks to Royi Namir on
