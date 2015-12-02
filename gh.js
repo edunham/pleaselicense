@@ -57,9 +57,11 @@ function digInFiles(name, isfork, link){
     var repo = JSON.parse(this.responseText);
     var licensefound = false;
     var readmefound = false;
+    var contribfound = false;
     repo.forEach(function(repo){
         licensefound = !!(licensefound || repo.name.match(/license/i) || repo.name.match(/copying/i));
         readmefound = !!(readmefound || repo.name.match(/readme/i));
+        contribfound = !!(contribfound || repo.name.match(/contributing/i));
     });
     console.log(repo);
 
@@ -116,6 +118,14 @@ function digInFiles(name, isfork, link){
         else{
             _gaq.push(['users._trackEvent', 'readmeMissing', link]);
             document.getElementById("lacksreadme").appendChild(createRow());
+        }
+        if (contribfound){
+            _gaq.push(['users._trackEvent', 'contribFound', link]);
+            document.getElementById("hascontrib").appendChild(createRow());
+        }
+        else{
+            _gaq.push(['users._trackEvent', 'contribMissing', link]);
+            document.getElementById("lackscontrib").appendChild(createRow());
         }
     }
 }
