@@ -22,3 +22,9 @@ Future Work
   (based on gh stats), or copies an existing CONTRIBUTING file if it's an org
 
 * Maybe something about CONDUCT? 
+
+Other Neat Stuff
+----------------
+
+`https://github.com/cmr/license-crusade`_ auto-files issues on crates with one
+of [Apache2,MIT] license suggesting they dual-license
